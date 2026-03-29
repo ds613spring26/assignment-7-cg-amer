@@ -6,14 +6,16 @@ n <- 200
 ui <- bootstrapPage(
   titlePanel("Clesean Glover"),
   numericInput('n', 'Number of obs', n),
-  plotOutput('Boxplot')
+  radioButtons("colors", "Choose a color?",
+      choices = c("green", "red", "blue", "yellow")),
+  plotOutput('plot')
 )
 
 
 # Define the server code
 server <- function(input, output) {
-  output$Boxplot <- renderPlot({
-    boxplot(runif(input$n), col = 'green')
+  output$plot <- renderPlot({
+    boxplot(runif(input$n), col = input$colors)
             })
 }
 
